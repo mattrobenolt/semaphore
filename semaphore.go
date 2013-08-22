@@ -11,24 +11,24 @@
 //    }
 package semaphore
 
-type semaphore chan struct{}
+type Semaphore chan struct{}
 
-// Increments the semaphore by 1
-func (s semaphore) Signal() {
+// Increments the `Semaphore` by 1
+func (s Semaphore) Signal() {
 	s <- struct{}{}
 }
 
 
-// Decrements the semaphore by 1
-func (s semaphore) Wait() {
+// Decrements the `Semaphore` by 1
+func (s Semaphore) Wait() {
 	<-s
 }
 
 
-// New returns an instance of a semaphore:
+// New returns an instance of a `Semaphore`:
 //    sem := New(10)
-func New(size int) semaphore {
-	sem := make(semaphore, size)
+func New(size int) Semaphore {
+	sem := make(Semaphore, size)
 	for i := 0; i < size; i++ {
 		sem <- struct{}{}
 	}
