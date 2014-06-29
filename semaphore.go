@@ -29,7 +29,7 @@ func (s Semaphore) Wait() {
 //    sem := New(10)
 func New(size int) Semaphore {
 	sem := make(Semaphore, size)
-	for i := 0; i < size; i++ {
+	for _ := range make([]struct{}, size) {
 		sem <- struct{}{}
 	}
 	return sem
